@@ -1,7 +1,20 @@
 1) Using IOC Container and Dependency Injection -- coding example
-
 *) Main needs Object of a POJO Class
-- Tell spring to Create a bean class, so that class object will be managed by spring in IOC Container : com/bhargavspring/demoApp/Dev.java
+- Tell spring to Create a bean class using @Component, so that class object will be managed by spring in IOC Container : com/bhargavspring/demoApp/Dev.java
 - Using our Bean Class without creating a object : com/bhargavspring/demoApp/DemoAppApplication.java
 
-*) One POJO Class needs Object of a another POJO Class
+======================================================================================
+2) @Autowired
+- Using One java class in another java class without crating a object
+1) we have a logic in this class:  com/bhargavspring/demoApp/Laptop.java
+- Interface : com/bhargavspring/demoApp/Computer.java
+2) using that in another class : com/bhargavspring/demoApp/Dev.java
+
+======================================================================================
+@Primary and @Qualifier
+- We majorly use this when we have a multiple classes implementing the same interface
+
+- Interface : com/bhargavspring/demoApp/Computer.java
+- Class1: com/bhargavspring/demoApp/Laptop.java
+- Class2: com/bhargavspring/demoApp/Desktop.java
+- Using : (IMP) : com/bhargavspring/demoApp/Dev.java

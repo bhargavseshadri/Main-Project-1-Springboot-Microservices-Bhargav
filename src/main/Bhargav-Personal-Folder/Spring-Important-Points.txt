@@ -1,3 +1,17 @@
+** VERY IMPORTANT POINTS
+
+@Component : Spring by default wont create the object of all the classes. we have to explicity tell spring in someway to create the
+             object of these specific classes and we do that by giving the @Component annotation, and those classes are called Bean Classes.
+
+@Autowired  : Using one java class inside another java class.
+
+@Primary : the use of this annotation is, when there is multiple classes implementing the same interface, then give preference to the class with this
+           annotation.
+
+@Qualifier : when we don't want to use @Primary, we use this @Qualifier at the time of dependency injection by giving the instance name.
+                - Class name is "Laptop" --> instance name is "laptop" (first letter small letter)
+                - So in case of confusion it will pickup the mentioned class.
+=============================================================================================
 *) Inversion of Control (IoC)
 - Inversion of control, means giving the control(some part of repitative work) to others. for example managing the
   object life cycle.
@@ -96,15 +110,26 @@ How it works:
 2. Spring automatically injects MyService into the field.
 3. No constructor or setter is required.
 
-
-
-
-
 =============================================================================================
-** VERY IMPORTANT POINTS
+*) AUTOWIRING -- @Autowired
 
-@Component : Spring by default wont create the object of all the classes. we have to explicity tell spring in someway to create the
-             object of these specific classes and we do that by giving the @Component annotation, and those classes are called Bean Classes.
+- com/bhargavspring/demoApp/Laptop.java
+- Using One java class in another java class without crating a object.
+- To do this we have 3 ways: Field Injection, Constructor Injection, Setter Injection (same we discussed in Dependency Injection)
+- For Constructor injection we dont need to write @Autowired because its by default takes it, but for Field Injection and Setter Injection we
+  have to give @Autowired. (in these field is not recommended)
+
+* We use a interface and a class as preferred, but what if we have more than one class implementing the same interface?
+- @Primary : the use of this annotation is, when there is a confusion, then give preference to this class.
+- @Qualifier : when we don't want to use @Primary, we use this @Qualifier at the time of dependency injection by giving the instance name.
+                - Class name is "Laptop" --> instance name is "laptop" (first letter small letter)
+                - So in case of confusion it will pickup the mentioned class.
+
+Example :
+Interface : com/bhargavspring/demoApp/Computer.java
+Class1: com/bhargavspring/demoApp/Laptop.java
+Class2: com/bhargavspring/demoApp/Desktop.java
+Using : (IMP) : com/bhargavspring/demoApp/Dev.java
 
 
 
