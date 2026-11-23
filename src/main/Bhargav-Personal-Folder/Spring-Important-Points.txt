@@ -1,0 +1,142 @@
+*) Inversion of Control (IoC)
+- Inversion of control, means giving the control(some part of repitative work) to others. for example managing the
+  object life cycle.
+
+- This IOC Container is lives in JVM, and all the objects our spring creates are present in this IOC Container and to use that we have to get the
+  objects from IOC. and IOC container itself is also a object. and the type of that ioc object is "ApplicationContext"
+- Using ApplicationContext : com/bhargavspring/demoApp/DemoAppApplication.java
+
+-----------------------------------------------------
+*) Dependency Injection (DI) : In Spring Boot, Dependency Injection (DI) means one class gets the object it needs from Spring,
+   instead of creating that object using new.
+- Actual Implementation of IOC
+
+- Three techniques to achieve dependency injection
+
+1. Constructor Injection (Recommended)
+The service object is injected through the constructor of the controller.
+
+@Service
+public class MyService {
+
+    public String getMessage() {
+        return "Hello from Service";
+    }
+}
+
+@RestController
+public class MyController {
+
+    private final MyService myService;
+
+    // Constructor Injection
+    public MyController(MyService myService) {
+        this.myService = myService;
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return myService.getMessage();
+    }
+}
+
+How it works:
+1. Spring creates the MyService object.
+2. Spring passes that object into the MyController constructor.
+3. The controller uses the service.
+Note: @Autowired is optional when there's only one constructor.
+
+
+
+2. Setter Injection
+The service object is injected through a setter method. The MyService class remains exactly the same.
+
+@RestController
+public class MyController {
+
+    private MyService myService;
+
+    // Setter Injection
+    @Autowired
+    public void setMyService(MyService myService) {
+        this.myService = myService;
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return myService.getMessage();
+    }
+}
+
+How it works:
+1. Spring creates the controller object.
+2. Spring calls the setMyService() method.
+3. Spring passes the service object through that method.
+
+
+
+3. Field Injection (NOT MUCH RECOMMENDED)
+The service object is injected directly into the variable using @Autowired.
+
+@RestController
+public class MyController {
+
+    // Field Injection
+    @Autowired
+    private MyService myService;
+
+    @GetMapping("/hello")
+    public String hello() {
+        return myService.getMessage();
+    }
+}
+
+How it works:
+1. Spring creates the controller object.
+2. Spring automatically injects MyService into the field.
+3. No constructor or setter is required.
+
+
+
+
+
+=============================================================================================
+** VERY IMPORTANT POINTS
+
+@Component : Spring by default wont create the object of all the classes. we have to explicity tell spring in someway to create the
+             object of these specific classes and we do that by giving the @Component annotation, and those classes are called Bean Classes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

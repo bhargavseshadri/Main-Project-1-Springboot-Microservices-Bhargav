@@ -1,0 +1,150 @@
+* What is a Thread in Java?
+Ans. A thread is an independent path of execution inside a running Java program.
+     In simple terms, a thread allows your application to perform a task without necessarily waiting for another task to finish.
+     - Types of Threads: Single-threading & Multithreading
+
+* How do we create threads in Java?
+Ans: There are two traditional approaches.
+
+Method 1: Extending the Thread class
+
+class MyThread extends Thread {
+
+    @Override
+    public void run() {  //Here run() is a manditory method
+        System.out.println("Thread is running");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        MyThread t1 = new MyThread();
+        t1.start();
+    }
+}
+
+Here's what happens:
+1. MyThread extends Java's Thread class.
+2. run() contains the task to execute.
+3. new MyThread() creates a thread object.
+4. start() tells the JVM to start the thread.
+5. The new thread executes the run() method.
+
+Method 2: Implementing Runnable (preferred for learning)
+class MyTask implements Runnable {
+
+    @Override
+    public void run() {
+        System.out.println("Task is running");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        MyTask task = new MyTask();
+
+        Thread t1 = new Thread(task);
+
+        t1.start();
+    }
+}
+
+The difference is straightforward:
+- Runnable defines what work needs to be done.
+- Thread represents the thread executing that work.
+
+- start() schedules a new thread to run. The task executes independently of the main thread.
+
+* How multiple threads actually execute
+* Java officially defines six thread states:
+  State 	    Meaning
+  NEW	        Thread created but not started
+  RUNNABLE	    Eligible to run or currently executing
+  BLOCKED	    Waiting to acquire a monitor lock
+  WAITING	    Waiting indefinitely for another action
+  TIMED_WAITING	Waiting for a specified duration
+  TERMINATED	Thread execution completed
+
+* Race Condition In Threads
+- What happens when two threads access the same variable?
+This brings us to an important concept called a race condition.
+class Counter {
+
+    int count = 0;
+
+    void increment() {
+        count++;
+    }
+}
+
+
+Suppose two threads execute increment() 1,000 times each.
+You might expect:
+Final Count = 2000
+
+But you could get:
+Final Count = 1784
+
+
+Why?
+Because count++ isn't a single atomic operation. It involves reading a value, incrementing it, and writing it back.
+
+Two threads can interfere with each other's updates.
+
+One solution is synchronized:
+class Counter {
+
+    private int count = 0;
+
+    synchronized void increment() {
+        count++;
+    }
+
+    synchronized int getCount() {
+        return count;
+    }
+}
+
+
+Now only one thread at a time can execute the synchronized method on the same Counter instance. For simple counters, AtomicInteger
+is another good alternative.
+
+* Thread pools : Creating too many can negatively affect performance. Instead, we use a thread pool. A thread pool maintains threads
+that can be reused to execute multiple tasks.
+
+* Java example using ExecutorService
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        ExecutorService executor =
+            Executors.newFixedThreadPool(3);
+
+        for (int i = 1; i <= 5; i++) {
+
+            int taskId = i;
+
+            executor.submit(() -> {
+                System.out.println(
+                    "Processing task " + taskId
+                    + " using "
+                    + Thread.currentThread().getName()
+                );
+            });
+        }
+
+        executor.shutdown();
+    }
+}
+
+- We create a pool with 3 threads.
+- We submit 5 tasks.
+- Up to 3 tasks can execute concurrently.
+- Remaining tasks wait for an available worker.
+- Threads are reused.
+- shutdown() stops accepting new tasks and allows submitted tasks to complete.

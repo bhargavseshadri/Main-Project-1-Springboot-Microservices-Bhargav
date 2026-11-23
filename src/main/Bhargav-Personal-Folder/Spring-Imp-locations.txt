@@ -1,0 +1,7 @@
+1) Using IOC Container and Dependency Injection -- coding example
+
+*) Main needs Object of a POJO Class
+- Tell spring to Create a bean class, so that class object will be managed by spring in IOC Container : com/bhargavspring/demoApp/Dev.java
+- Using our Bean Class without creating a object : com/bhargavspring/demoApp/DemoAppApplication.java
+
+*) One POJO Class needs Object of a another POJO Class
