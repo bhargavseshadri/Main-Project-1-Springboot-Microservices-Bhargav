@@ -11,10 +11,27 @@
 2) using that in another class : com/bhargavspring/demoApp/Dev.java
 
 ======================================================================================
-@Primary and @Qualifier
+3) @Primary and @Qualifier
 - We majorly use this when we have a multiple classes implementing the same interface
 
 - Interface : com/bhargavspring/demoApp/Computer.java
 - Class1: com/bhargavspring/demoApp/Laptop.java
 - Class2: com/bhargavspring/demoApp/Desktop.java
 - Using : (IMP) : com/bhargavspring/demoApp/Dev.java
+
+======================================================================================
+***Three Important Layers -- Controller Layer, Service (Business Logic Layer), Repository (Data Access / Persistence Layer)
+
+4) Controller Layer : Main work of this Controller is accept the request and run the the corresponding services and responds with a Response.
+- So when a user hits particular path specified in @RequestMapping("/login") or @GetMapping("/") that purticular method executes and
+  give the response. Remember we either give @RestController in a class level or @ResponseBody in the method level.
+
+Step: 1 : create a controller class, define the code using the annotations @RestController or @ResponseBody, @GetMapping or @RequestMapping : com/bhargavspring/demoApp/controller/HomeController.java
+Step: 2 : run - com/bhargavspring/demoApp/DemoAppApplication.java
+Step: 3 : then go to localhost:8080 and hit the corresponding paths.
+
+
+
+
+
+
