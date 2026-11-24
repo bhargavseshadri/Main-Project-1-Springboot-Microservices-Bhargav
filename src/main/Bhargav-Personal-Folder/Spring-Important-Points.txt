@@ -1,6 +1,6 @@
 ANNOTATIONS:
 
-@Component (class level): Spring by default wont create the object of all the classes. we have to explicity tell spring in someway to create the
+@Component (class level): Spring by default won't create the object of all the classes in the IOC Server. we have to explicity tell spring in someway to create the
              object of these specific classes and we do that by giving the @Component annotation, and those classes are called Bean Classes.
 
 @Autowired (field or method level): Using one java class inside another java class.
@@ -15,6 +15,8 @@ ANNOTATIONS:
 @Controller (class level): Marks a class that handles web requests, such as requests mapped with @GetMapping or @PostMapping.
               By default, if a method returns a String, Spring treats it as the name of a page to show.
               To send data directly back to the user, use @ResponseBody on the method or use @RestController on the class.
+
+@Service (Class level): we use this for a Service Layer classes, in the background this is similar to @Component only.
 
 @ResponseBody (class or method level): Tells Spring to send the method's returned value directly in the web response, instead of looking for a page.
               If the method returns an object, Spring can convert it to JSON. When added to a class, it applies to all request methods in that class.
@@ -44,27 +46,7 @@ General annotation	                                Shortcut annotation
 =============================================================================================
 IMPORTANT POINTS:
 
-- Inside a typical Spring Boot application, three common layers are Controller, Service, and Repository.
 
-1. Controller (Presentation / Web Layer) (@Controller )
-- Receives HTTP requests from clients and maps them to Java methods using annotations such as @RestController, @GetMapping, and @PostMapping.
-- Reads request data, calls the appropriate service method, and returns a response (often JSON).
-- Keep controllers focused on HTTP concerns; put business rules in the service layer.
-
-2. Service (Business Logic Layer)
-- Holds application rules and coordinates work needed to fulfill a request.
-- Is commonly marked with @Service so Spring can create and manage it as a bean.
-- Is called by a controller and can use one or more repositories to read or update data.
-- Example flow: Controller -> Service -> Repository.
-
-3. Repository (Data Access / Persistence Layer)
-- Handles communication with the database, such as saving, finding, updating, and deleting records.
-- In Spring Data, an interface can extend JpaRepository<Entity, IdType>; Spring provides its implementation at runtime.
-- Is commonly marked with @Repository when writing a custom data-access class. Spring Data repository interfaces are detected automatically.
-- Keep database access here rather than putting SQL or persistence code in controllers.
-
-Note: These are application layers, not three mandatory Spring Boot services or separate network services. A small
-      application may not need every layer, but separating their responsibilities makes code easier to maintain and test.
 
 =============================================================================================
 *) Inversion of Control (IoC)
@@ -187,18 +169,32 @@ Class2: com/bhargavspring/demoApp/Desktop.java
 Using : (IMP) : com/bhargavspring/demoApp/Dev.java
 
 =============================================================================================
-*) Controller Layer : Main work of this Controller is accept the request and run the the corresponding services and responds with a Response.
-                      - So when a user hits particular path specified in @RequestMapping("/login") or @GetMapping("/") that purticular method executes and
-                        give the response. Remember we either give @RestController in a class level or @ResponseBody in the method level.
+**) IMPORTANT LAYERS
 
+- Inside a typical Spring Boot application, three common layers are Controller, Service, and Repository.
+
+1. Controller (Presentation / Web Layer) (@Controller )
+- Receives HTTP requests from clients and maps them to Java methods using annotations such as @RestController, @GetMapping, and @PostMapping.
+- Reads request data, calls the appropriate service method, and returns a response (often JSON).
+- Keep controllers focused on HTTP concerns; put business rules in the service layer.
 - Important annotations : @Controller or @RestController or @ResponseBody, @RequestMapping or @GetMapping, @PostMapping
 
 
+2. Service (Business Logic Layer)
+- When a controller wants the data it wont as the DB it ask the SERVICE LAYER.
+- Holds application rules and coordinates work needed to fulfill a request.
+- Is commonly marked with @Service so Spring can create and manage it as a bean.
+- Is called by a controller and can use one or more repositories to read or update data.
+- Example flow: Controller -> Service -> Repository.
 
+3. Repository (Data Access / Persistence Layer)
+- Handles communication with the database, such as saving, finding, updating, and deleting records.
+- In Spring Data, an interface can extend JpaRepository<Entity, IdType>; Spring provides its implementation at runtime.
+- Is commonly marked with @Repository when writing a custom data-access class. Spring Data repository interfaces are detected automatically.
+- Keep database access here rather than putting SQL or persistence code in controllers.
 
-
-
-
+Note: These are application layers, not three mandatory Spring Boot services or separate network services. A small
+      application may not need every layer, but separating their responsibilities makes code easier to maintain and test.
 
 
 

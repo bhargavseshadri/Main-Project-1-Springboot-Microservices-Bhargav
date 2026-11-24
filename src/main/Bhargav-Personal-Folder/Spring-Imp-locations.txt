@@ -20,15 +20,26 @@
 - Using : (IMP) : com/bhargavspring/demoApp/Dev.java
 
 ======================================================================================
-***Three Important Layers -- Controller Layer, Service (Business Logic Layer), Repository (Data Access / Persistence Layer)
+4)***Three Important Layers -- Controller Layer, Service (Business Logic Layer), Repository (Data Access / Persistence Layer)
 
-4) Controller Layer : Main work of this Controller is accept the request and run the the corresponding services and responds with a Response.
+a) Controller Layer : Main work of this Controller is accept the request and run the the corresponding services and responds with a Response.
 - So when a user hits particular path specified in @RequestMapping("/login") or @GetMapping("/") that purticular method executes and
   give the response. Remember we either give @RestController in a class level or @ResponseBody in the method level.
 
 Step: 1 : create a controller class, define the code using the annotations @RestController or @ResponseBody, @GetMapping or @RequestMapping : com/bhargavspring/demoApp/controller/HomeController.java
 Step: 2 : run - com/bhargavspring/demoApp/DemoAppApplication.java
 Step: 3 : then go to localhost:8080 and hit the corresponding paths.
+
+------
+b) Service (Business Logic Layer)
+* Instead of simply returning a normal string through Controller, we will return a object of Products Data.
+* The Spring will simply return the list of products in response in a JSON format.
+
+* Step: 4 -- Run DemoAppApplication.java, and hit http://localhost:8080/products
+* Step: 3 -- This is the main Controller class : com/bhargavspring/demoApp/controller/product/ProductController.java
+* Step: 2 -- Service Layer : com/bhargavspring/demoApp/service/ProductService.java
+* Step: 1 -- Model : com/bhargavspring/demoApp/model/Product.java
+
 
 
 
