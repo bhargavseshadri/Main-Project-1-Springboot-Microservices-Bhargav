@@ -187,9 +187,10 @@ Using : (IMP) : com/bhargavspring/demoApp/Dev.java
 - Receives HTTP requests from clients and maps them to Java methods using annotations such as @RestController, @GetMapping, and @PostMapping.
 - Reads request data, calls the appropriate service method, and returns a response (often JSON).
 - Keep controllers focused on HTTP concerns; put business rules in the service layer.
-- Important annotations : @Controller or @RestController or @ResponseBody, @RequestMapping or @GetMapping, @PostMapping
 
+- Important annotations : @Controller or @RestController or @ResponseBody, @RequestMapping or @GetMapping, @PostMapping, @PathVariable, @RequestBody
 
+--------------------
 2. Service (Business Logic Layer)
 - When a controller wants the data it wont as the DB it ask the SERVICE LAYER.
 - Holds application rules and coordinates work needed to fulfill a request.
@@ -197,6 +198,9 @@ Using : (IMP) : com/bhargavspring/demoApp/Dev.java
 - Is called by a controller and can use one or more repositories to read or update data.
 - Example flow: Controller -> Service -> Repository.
 
+- Important Annotations : @Service
+
+--------------------
 3. Repository (Data Access / Persistence Layer)
 - Handles communication with the database, such as saving, finding, updating, and deleting records.
 - In Spring Data, an interface can extend JpaRepository<Entity, IdType>; Spring provides its implementation at runtime.
@@ -206,6 +210,23 @@ Using : (IMP) : com/bhargavspring/demoApp/Dev.java
 Note: These are application layers, not three mandatory Spring Boot services or separate network services. A small
       application may not need every layer, but separating their responsibilities makes code easier to maintain and test.
 
+* In old time we use Java JDBC, but that is more static code and not so reliable.
+* After that we use spring JDBC, this is good but we have more easy way to do it. because we are just doing the CURD operations only right so we have
+  a easy way to do that, and in that way we use a concept of ORM
+* ORM (Object Relational Mapping): Connecting the RDBMS World and our Java Object world is called a ORM.
+                                   - This concept helps to translate our object in to Database query.
+                                   - by using this concept ORM tool helps us in creating table names, column names etc. One of the
+                                     ORM Tool is Hibernate.
+
+* ORM Tool:
+- this tool helps to create a database table and give its a name, column names etc.
+- this tool takes our class name as a Table name and the variables in it as a columns and "Each object becomes one row".
+
+* So JPA is a standards set by java to interact with the DB, and we use Spring Data JPA to send the Requests to H2 Database.
+
+- Important Annotations :
+
+--------------------
 
 
 

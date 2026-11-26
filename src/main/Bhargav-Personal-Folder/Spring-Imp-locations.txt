@@ -30,7 +30,7 @@ Step: 1 : create a controller class, define the code using the annotations @Rest
 Step: 2 : run - com/bhargavspring/demoApp/DemoAppApplication.java
 Step: 3 : then go to localhost:8080 and hit the corresponding paths.
 
-------
+======================================================================================
 b) Service (Business Logic Layer)
 * Instead of simply returning a normal string through Controller, we will return a object of Products Data.
 * The Spring will simply return the list of products in response in a JSON format.
@@ -80,3 +80,6 @@ Step: 3 - form the client we make a DELETE call by sending the productId in the 
         - EG: http://localhost:8080/products/100
 
 ======================================================================================
+c) Repository Layer : The job of this layer is to connect and interact with the database.
+
+* we use Spring Data JPA to send the Requests to H2 Database.
