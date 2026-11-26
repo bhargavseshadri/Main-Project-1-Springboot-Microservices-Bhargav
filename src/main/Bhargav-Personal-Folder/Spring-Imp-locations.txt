@@ -104,5 +104,36 @@ Step: 3 - Now write the code in Service to make the curd operations to the datab
 Step: 4 - start the spring application.
 Step: 5 - And first we have to add some data to the DB - so from post man or website(if we have) make some post requests and add some data to the Product endpoint.
           Make post call to :http://localhost:8080/products and in body send product JSON
-Step: 6 - and after that refresh the DB and run the query "select * from product" to see the complete table.
+Step: 6 (last step)- and after that refresh the DB and run the query "select * from product" to see the complete table.
+
+======================================================================================
+PROJECT - 1
+* Using React we create a interface and from that we add and display the products, we fetch the products from the H2 Database.
+    - Frontend : React
+    - Backend : Springboot
+    - Database : H2
+
+* Columns in the Table : id(Primary Key)(int), name, description, brand, Price(int), Category, releaseDate(date), available(boolean), quantity
+
+* CREATING THE DATABASE STRUCTURE
+Step: 1 - Crete a Model : com/bhargavspring/demoApp/projectOne/model/ProjectProduct.java
+        - This will create the structure for database
+Step: 2 - Check the H2 console if that database with
+
+* NOW WE CREATE A CONTROLLER FOR HANDLING HTTP REQUESTS, AND SERVICE FOR INTERACTING WITH REPOSITORY LAYER
+Step: 3 - Controller - com/bhargavspring/demoApp/projectOne/controller/ProjectProductController.java
+Step: 4 - Service - com/bhargavspring/demoApp/projectOne/service/ProjectProductService.java
+
+
+
+
+
+
+
+
+
+
+
+
+
 
