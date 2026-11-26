@@ -26,6 +26,12 @@ ANNOTATIONS:
               It combines @Controller and @ResponseBody, so you do not need to add @ResponseBody to every method. It is commonly used for REST APIs.
                 - com/bhargavspring/demoApp/controller/HomeRestController.java
 
+@PathVariable (method parameter): Gets a value from a variable part of the URL and passes it to the controller method.
+              For example, in "/products/{id}", the value in place of {id} is passed to the id parameter:
+              @GetMapping("/products/{id}")
+              public Product getProduct(@PathVariable int id) { ... }
+              If the variable name and parameter name are different, write the URL variable name in @PathVariable, for example @PathVariable("id") int productId.
+
 @RequestMapping : - It is a general-purpose annotation that supports different HTTP methods, such as GET, POST, PUT, DELETE and PATCH.
                   - used to map incoming HTTP requests to a specific controller class or handler method based on the URL path, HTTP method,
                     request parameters, headers and other request conditions.
@@ -42,6 +48,10 @@ General annotation	                                Shortcut annotation
 @RequestMapping(method = RequestMethod.PUT)	    -   @PutMapping
 @RequestMapping(method = RequestMethod.DELETE)	-   @DeleteMapping
 @RequestMapping(method = RequestMethod.PATCH)	-   @PatchMapping
+
+@RequestBody (method parameter): Tells Spring to read data from the HTTP request body and put it into the method parameter.
+              For example, a client can send a JSON product in a POST request, and Spring converts that JSON into a Product object.
+              Use it when the request sends data in its body; it is commonly used with @PostMapping or @PutMapping.
 
 =============================================================================================
 IMPORTANT POINTS:

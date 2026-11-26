@@ -35,14 +35,48 @@ b) Service (Business Logic Layer)
 * Instead of simply returning a normal string through Controller, we will return a object of Products Data.
 * The Spring will simply return the list of products in response in a JSON format.
 
+- we make a GET call
 * Step: 4 -- Run DemoAppApplication.java, and hit http://localhost:8080/products
 * Step: 3 -- This is the main Controller class : com/bhargavspring/demoApp/controller/product/ProductController.java
 * Step: 2 -- Service Layer : com/bhargavspring/demoApp/service/ProductService.java
 * Step: 1 -- Model : com/bhargavspring/demoApp/model/Product.java
 
+------
+*) So when we have lots of products and if we want our API endpoint to give the specific product by taking product id(prop in the response json).
+
+- GET Call
+- Eg: http://localhost:8080/products/101
+* To make this work we need a one more method with a @PathVariable parameter
+
+- Step: 1 - com/bhargavspring/demoApp/service/ProductService.java
+- Step: 2 - com/bhargavspring/demoApp/controller/product/ProductController.java
 
 
+- POST Call
+Step: 1 - so now in service we create a method to add the product in the existing list - com/bhargavspring/demoApp/service/ProductService.java
+Step: 2 - so in Controller we create a method for the request calls and that method call the method in the service - com/bhargavspring/demoApp/controller/product/ProductController.java
+Step: 3 - form the client we make a post call by sending the new product json in the request body.
+        - EG: {
+                "prodId": 100,
+                "price": 0,
+                "prodName": "No Item"
+              }
+
+- PUT call
+Step: 1 - so now in service we create a method to modify the product in the existing list - com/bhargavspring/demoApp/service/ProductService.java
+Step: 2 - so in Controller we create a method for the request calls and that method call the method in the service - com/bhargavspring/demoApp/controller/product/ProductController.java
+Step: 3 - form the client we make a PUT call by sending the  product(the existing product that needs modification) json in the request body.
+        - EG: {
+                "prodId": 100,
+                "price": 0,
+                "prodName": "No Item"
+              }
 
 
+- DELETE call
+Step: 1 - so now in service we create a method to DELETE the product in the existing list - com/bhargavspring/demoApp/service/ProductService.java
+Step: 2 - so in Controller we create a method for the request calls and that method call the method in the service - com/bhargavspring/demoApp/controller/product/ProductController.java
+Step: 3 - form the client we make a DELETE call by sending the productId in the endpoint URL.
+        - EG: http://localhost:8080/products/100
 
-
+======================================================================================
