@@ -23,30 +23,30 @@ public class ProductController {
     //The Spring will simply return the products in response in a JSON format.
     @RequestMapping("/products")
     public List<Product> getProducts() {
-        return service.getProducts();  //Using the created object we are getting the products from the service.
+        return service.getDBProducts();  //Using the created object we are getting the products from the service.
     }
 
     @GetMapping("/products/{prodId}")
     public Product getProductById(@PathVariable int prodId) {  // this method is responsible to give that particular product when we give the prod id in API endpoint
-        return service.getProductByGivenId(prodId);
+        return service.getProductByIdfromDB(prodId);
     }
 
 
     //Example for making POST Request
     @PostMapping("/products")
     public void addProduct(@RequestBody Product prod) {
-        service.addNewProduct(prod);
+        service.addProductToDB(prod);
     }
 
     //update product
     @PutMapping("/products")
     public void updateProduct(@RequestBody Product prod) {
-        service.updateProductinList(prod);
+        service.updateDBProduct(prod);
     }
 
     //delete product
     @DeleteMapping("/products/{prodId}")
     public void deleteProduct(@PathVariable int prodId){
-        service.deleteProductinList(prodId);
+        service.deleteDBProductByID(prodId);
     }
 }

@@ -83,3 +83,26 @@ Step: 3 - form the client we make a DELETE call by sending the productId in the 
 c) Repository Layer : The job of this layer is to connect and interact with the database.
 
 * we use Spring Data JPA to send the Requests to H2 Database.
+* Add the dependencies "spring-boot-starter-data-jpa" and "h2 runtime".
+* And whenever we add the spring data jpa it will ask us the URL to connect with the database, we add that properties in : src/main/resources/application.properties
+* Adding the database related manditory configurations
+Step: 1 - go to src/main/resources/application.properties
+Step: 2 - add "spring.datasource.url" by giving db name, db type
+Step: 3 - Access the database : http://localhost:8080/h2-console and in the console url column give spring.datasource.url value specified in
+          our application.properties file
+-- DATABASE SETUP IS COMPLETED --
+
+- Now lets create the table, columns everything using our Springboot
+
+Step: 1 - Create a Interface
+            - Interface with @Repository will give you repository methods without you explicitely defines them in the class, so I am saying a interface is enough
+              and a class defination is not needed when we extends the interface JpaRepository<className, type> because it gives all the methods.
+                - com/bhargavspring/demoApp/repository/ProductRepo.java
+
+Step: 2 - Create a java class, that Java class is a data that JPA should store in a database table use @Entity and @Id : com/bhargavspring/demoApp/model/Product.java
+Step: 3 - Now write the code in Service to make the curd operations to the database - com/bhargavspring/demoApp/service/ProductService.java
+Step: 4 - start the spring application.
+Step: 5 - And first we have to add some data to the DB - so from post man or website(if we have) make some post requests and add some data to the Product endpoint.
+          Make post call to :http://localhost:8080/products and in body send product JSON
+Step: 6 - and after that refresh the DB and run the query "select * from product" to see the complete table.
+

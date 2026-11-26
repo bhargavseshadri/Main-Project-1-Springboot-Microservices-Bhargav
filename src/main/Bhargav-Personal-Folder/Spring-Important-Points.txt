@@ -53,10 +53,22 @@ General annotation	                                Shortcut annotation
               For example, a client can send a JSON product in a POST request, and Spring converts that JSON into a Product object.
               Use it when the request sends data in its body; it is commonly used with @PostMapping or @PutMapping.
 
+@Repository (class level): Marks a class that reads from or writes to a database. It is part of the data access layer.
+              Spring creates and manages the class as a bean. Spring Data repository interfaces are usually detected automatically,
+              so you do not need to add @Repository to them yourself.
+
+@Entity (class level): Marks a Java class as data that JPA should store in a database table. Each object of the class represents one row in that table.
+              Example: an object of a Product entity can represent one product row in the database.
+
+@Id (field level): Marks the field that uniquely identifies each saved object (row) in the database table. This field is the table's primary key.
+              Each entity must have an @Id field. For example, a productId field can be the ID for a Product entity.
+
 =============================================================================================
 IMPORTANT POINTS:
 
-
+- Interface with @Repository will give you repository methods without you explicitely defines them in the class, so I am saying a interface is enough
+  and a class defination is not needed when we use @Repository and extends the interface JpaRepository<className, type>
+  - Eg: com/bhargavspring/demoApp/repository/ProductRepo.java
 
 =============================================================================================
 *) Inversion of Control (IoC)
@@ -224,7 +236,7 @@ Note: These are application layers, not three mandatory Spring Boot services or 
 
 * So JPA is a standards set by java to interact with the DB, and we use Spring Data JPA to send the Requests to H2 Database.
 
-- Important Annotations :
+- Important Annotations : @Repository
 
 --------------------
 
