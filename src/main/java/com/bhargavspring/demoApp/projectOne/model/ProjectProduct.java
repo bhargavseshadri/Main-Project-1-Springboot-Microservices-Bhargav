@@ -18,7 +18,7 @@ import java.util.Date;
 public class ProjectProduct {
 
     @Id //Primary Key
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  //This will generate the ID automatically
     private int id;
     private String name;
     private String desc;

@@ -11,9 +11,9 @@ import java.util.List;
 public class ProjectProductService {
 
     @Autowired
-    private ProjectProductRepo repo;
+    private ProjectProductRepo repo;  //Connecting with our Repository Layer
 
     public List<ProjectProduct> getAllProducts() {
-        return repo.findAll();
+        return repo.findAll();  //Returning the List of products
     }
 }

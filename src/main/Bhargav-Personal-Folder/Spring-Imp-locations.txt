@@ -109,7 +109,7 @@ Step: 6 (last step)- and after that refresh the DB and run the query "select * f
 ======================================================================================
 PROJECT - 1
 * Using React we create a interface and from that we add and display the products, we fetch the products from the H2 Database.
-    - Frontend : React
+    - Frontend : React (FE Port Url : http://localhost:5173/) Repo : https://github.com/bhargavseshadri/Main-Project-1-FrontEnd-Springboot-Microservices-Bhargav
     - Backend : Springboot
     - Database : H2
 
@@ -123,6 +123,8 @@ Step: 2 - Check the H2 console if that database with
 * NOW WE CREATE A CONTROLLER FOR HANDLING HTTP REQUESTS, AND SERVICE FOR INTERACTING WITH REPOSITORY LAYER
 Step: 3 - Controller - com/bhargavspring/demoApp/projectOne/controller/ProjectProductController.java
 Step: 4 - Service - com/bhargavspring/demoApp/projectOne/service/ProjectProductService.java
+Step: 5 - Repository - com/bhargavspring/demoApp/projectOne/repo/ProjectProductRepo.java
+
 
 
 
