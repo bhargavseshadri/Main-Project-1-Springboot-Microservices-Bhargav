@@ -63,6 +63,11 @@ General annotation	                                Shortcut annotation
 @Id (field level): Marks the field that uniquely identifies each saved object (row) in the database table. This field is the table's primary key.
               Each entity must have an @Id field. For example, a productId field can be the ID for a Product entity.
 
+@CrossOrigin (class or method level): Allows a web page hosted on a different origin (scheme, host or port) to make requests to the annotated controller or endpoint.
+              Use it when a frontend and Spring API run on different origins. You can configure allowed origins, HTTP methods and headers, for example:
+              @CrossOrigin(origins = "http://localhost:3000")
+              By default, it allows requests from any origin; restrict origins as appropriate for your application.
+
 =============================================================================================
 IMPORTANT POINTS:
 

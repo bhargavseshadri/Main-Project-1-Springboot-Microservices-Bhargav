@@ -16,4 +16,8 @@ public class ProjectProductService {
     public List<ProjectProduct> getAllProducts() {
         return repo.findAll();  //Returning the List of products
     }
+
+    public ProjectProduct getProductById(int id) {
+        return repo.findById(id).orElse(null);
+    }
 }

@@ -1,6 +1,7 @@
 package com.bhargavspring.demoApp.projectOne.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,6 +22,7 @@ public class ProjectProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //This will generate the ID automatically
     private int id;
     private String name;
+    @Column(name = "description")
     private String desc;
     private String brand;
     private BigDecimal price;

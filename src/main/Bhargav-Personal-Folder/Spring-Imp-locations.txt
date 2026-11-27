@@ -110,8 +110,11 @@ Step: 6 (last step)- and after that refresh the DB and run the query "select * f
 PROJECT - 1
 * Using React we create a interface and from that we add and display the products, we fetch the products from the H2 Database.
     - Frontend : React (FE Port Url : http://localhost:5173/) Repo : https://github.com/bhargavseshadri/Main-Project-1-FrontEnd-Springboot-Microservices-Bhargav
+                 - To start the react application : npm.cmd install
+                                                    npm.cmd run dev
+
     - Backend : Springboot
-    - Database : H2
+    - Database : H2  (we are putting the dummy data in our DB in src/main/resources/data.sql file)
 
 * Columns in the Table : id(Primary Key)(int), name, description, brand, Price(int), Category, releaseDate(date), available(boolean), quantity
 
@@ -125,7 +128,14 @@ Step: 3 - Controller - com/bhargavspring/demoApp/projectOne/controller/ProjectPr
 Step: 4 - Service - com/bhargavspring/demoApp/projectOne/service/ProjectProductService.java
 Step: 5 - Repository - com/bhargavspring/demoApp/projectOne/repo/ProjectProductRepo.java
 
-
+* Now the Frontend and Backend is ready, so lets go in to the in depth logic part.
+- In a home page when we click on any particular product it should  make a Request to that particular productId and
+  fetch that product details based on the product id in the request URL : http://localhost:5173/product/2. (path in react : src\components\Product.jsx)
+- Step: 1 : Prepare the React Code
+- Step: 2 : Now write the backend controller logic : com/bhargavspring/demoApp/projectOne/controller/ProjectProductController.java
+- Step: 3 : Service Logic : com/bhargavspring/demoApp/projectOne/service/ProjectProductService.java
+- Step: 4 : Repo : com/bhargavspring/demoApp/projectOne/repo/ProjectProductRepo.java
+- Step: 5 : now start the react and in the home page and hit the product in the home page.
 
 
 
