@@ -137,9 +137,14 @@ Step: 5 - Repository - com/bhargavspring/demoApp/projectOne/repo/ProjectProductR
 - Step: 4 : Repo : com/bhargavspring/demoApp/projectOne/repo/ProjectProductRepo.java
 - Step: 5 : now start the react and in the home page and hit the product in the home page.
 
+* Adding the New Product with the Image
+- Step: 1 : Controller logic :  com/bhargavspring/demoApp/projectOne/controller/ProjectProductController.java
+- Step: 2 : Service Logic : com/bhargavspring/demoApp/projectOne/service/ProjectProductService.java
+- Now if the frontend requests to this endpoint : http://localhost:8080/api/product/1/image, the spring will
+  provide that image path from the db
 
-
-
+* Updating and Deletion Logic
+- React will make a PUT-http://localhost:8080/api/product/${id} and DELETE requests from the UI.
 
 
 

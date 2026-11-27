@@ -52,6 +52,16 @@ General annotation	                                Shortcut annotation
 @RequestBody (method parameter): Tells Spring to read data from the HTTP request body and put it into the method parameter.
               For example, a client can send a JSON product in a POST request, and Spring converts that JSON into a Product object.
               Use it when the request sends data in its body; it is commonly used with @PostMapping or @PutMapping.
+              - It will accept whole json as one object.
+
+@RequestPart (method parameter): Binds one named part of a multipart/form-data request to a method parameter. Use it when a request contains separate parts,
+              such as a file and a JSON object; unlike @RequestBody, it does not bind the entire request body as one object.
+              Example:
+              @PostMapping(value = "/products", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+              public void addProduct(@RequestPart("product") Product product,
+                                     @RequestPart("image") MultipartFile image) { ... }
+              The client must send multipart parts named "product" and "image". Spring converts the JSON product part to a Product object
+              and provides the uploaded file as a MultipartFile.
 
 @Repository (class level): Marks a class that reads from or writes to a database. It is part of the data access layer.
               Spring creates and manages the class as a bean. Spring Data repository interfaces are usually detected automatically,
@@ -67,6 +77,15 @@ General annotation	                                Shortcut annotation
               Use it when a frontend and Spring API run on different origins. You can configure allowed origins, HTTP methods and headers, for example:
               @CrossOrigin(origins = "http://localhost:3000")
               By default, it allows requests from any origin; restrict origins as appropriate for your application.
+
+ResponseEntity<T> (controller return type): Represents the complete HTTP response, letting a controller set the response body, status code and headers.
+              Use it when an endpoint needs to return a specific status (for example, 201 Created or 404 Not Found) along with data:
+              @GetMapping("/products/{id}")
+              public ResponseEntity<Product> getProduct(@PathVariable int id) {
+                  return ResponseEntity.ok(productService.findById(id));
+              }
+              For other responses, use builders such as ResponseEntity.status(HttpStatus.NOT_FOUND).build() or
+              ResponseEntity.status(HttpStatus.CREATED).body(product). Spring converts an object body to JSON in a REST controller.
 
 =============================================================================================
 IMPORTANT POINTS:

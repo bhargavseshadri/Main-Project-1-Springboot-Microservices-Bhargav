@@ -5,9 +5,12 @@ import com.bhargavspring.demoApp.projectOne.model.ProjectProduct;
 import com.bhargavspring.demoApp.projectOne.service.ProjectProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,8 +28,12 @@ public class ProjectProductController {
 
 
     @GetMapping("/products/{prodId}")
-    public ProjectProduct getProductById(@PathVariable int prodId) {
-        return service.getProductById(prodId);
+    public ResponseEntity<ProjectProduct> getProductById(@PathVariable int prodId) {
+        ProjectProduct product = service.getProductById(prodId);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(product);
     }
 
 
@@ -45,4 +52,64 @@ public class ProjectProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    //Adding the New Product and Image
+    @PostMapping(value = "/product", consumes = "multipart/form-data")
+    public ResponseEntity<?> addProduct(
+            @RequestPart("product") ProjectProduct product,
+            @RequestPart("imageFile") MultipartFile imageFile) {
+        try {
+            ProjectProduct product1 = service.addProduct(product, imageFile);
+            return new ResponseEntity<>(product1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    //Method for getting the image from db using the product Id, this below endpoint is used in the React href tags
+    @GetMapping("/product/{productId}/image")
+    public ResponseEntity<byte[]> getImageByProductId(@PathVariable int productId) {
+        ProjectProduct product = service.getProductById(productId);
+        byte[] imageFile = product.getImageData();
+
+        return ResponseEntity.ok().contentType(MediaType.valueOf(product.getImageType())).body(imageFile);
+
+    }
+
+
+    //Update Logic
+    @PutMapping("/product/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable int id, @RequestPart ProjectProduct product, @RequestPart MultipartFile imageFile) {
+
+        ProjectProduct product1 = null;
+        try {
+            product1 = service.updateProduct(id, product, imageFile);
+        } catch (IOException e) {
+            return new ResponseEntity<>("Failed to update", HttpStatus.BAD_REQUEST);
+        }
+        if (product1 != null) {
+            return new ResponseEntity<>("updated", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to update", HttpStatus.BAD_REQUEST);
+        }
+
+
+    }
+
+
+    //Delete Logic
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable int id) {
+        ProjectProduct product = service.getProductById(id);
+        if (product != null) {
+            service.deleteProduct(id);
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+
 }

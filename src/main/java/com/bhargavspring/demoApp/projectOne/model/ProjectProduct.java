@@ -1,10 +1,6 @@
 package com.bhargavspring.demoApp.projectOne.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +16,7 @@ public class ProjectProduct {
 
     @Id //Primary Key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //This will generate the ID automatically
-    private int id;
+    private Integer id;
     private String name;
     @Column(name = "description")
     private String desc;
@@ -30,4 +26,11 @@ public class ProjectProduct {
     private Date releaseDate;
     private boolean available;
     private int quantity;
+
+
+    //Image Details
+    private String imageName;
+    private String imageType;
+    @Lob
+    private byte[] imageData;  //Storing the image in a byte format
 }
